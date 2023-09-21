@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movimiento parabólico</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div class="container py-4 bg-light mt-2 text-center">
+      <h1>Simulador de movimiento parabólico</h1>
+      <p class="lead">Integrantes: Daniel Lagos - Sergio Quintana</p>
+      <div class="text-center fs-5 mb-4"></div>
+      <hr />
+      <div class="card">
+        <div class="card-header">
+          <p class="h5">Parametros de simulación</p>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <p class="h6">Altura (m):</p>
+              <input
+                type="number"
+                id="ih"
+                value="50"
+                style="width: 70px"
+                min="0"
+                oninput="validity.valid||(value='');"
+              />
+            </div>
+            <div class="col">
+              <p class="h6">Velocidad (m/s):</p>
+              <input
+                type="number"
+                id="iv"
+                value="80"
+                style="width: 70px"
+                min="1"
+                oninput="validity.valid||(value='');"
+              />
+            </div>
+            <div class="col">
+              <p class="h6">Ángulo (deg)</p>
+              <input
+                type="number"
+                id="ia"
+                value="20"
+                style="width: 70px"
+                min="0"
+                max="90"
+                oninput="validity.valid||(value='');"
+              />
+            </div>
+            <div class="col">
+              <p class="h6">Framerate (fps):</p>
+              <input
+                type="number"
+                id="fr"
+                value="60"
+                style="width: 70px"
+                min="30"
+                oninput="validity.valid||(value='');"
+              />
+            </div>
+            <div class="col">
+              <p class="h6">g (m/s<sup>2</sup>):</p>
+              <input
+                type="number"
+                id="ag"
+                value="9.8"
+                style="width: 70px"
+                min="0"
+                oninput="validity.valid||(value='');"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="card">
+        <div class="card-header">
+          <p class="h5">Parametros de simulación</p>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <p class="h6">Altura 2 (m):</p>
+              <input
+                type="number"
+                id="ih2"
+                value="0"
+                style="width: 70px"
+                min="0"
+                oninput="validity.valid||(value='');"
+              />
+            </div>
+            <div class="col">
+              <p class="h6">Velocidad 2 (m/s):</p>
+              <input
+                type="number"
+                id="iv2"
+                value="100"
+                style="width: 70px"
+                min="1"
+                oninput="validity.valid||(value='');"
+              />
+            </div>
+            <div class="col">
+              <p class="h6">Ángulo 2 (deg)</p>
+              <input
+                type="number"
+                id="ia2"
+                value="50"
+                style="width: 70px"
+                min="0"
+                max="90"
+                oninput="validity.valid||(value='');"
+              />
+            </div>
+            <div class="col">
+              <p class="h6">Framerate (fps):</p>
+              <input
+                type="number"
+                id="fr2"
+                value="60"
+                style="width: 70px"
+                min="30"
+                oninput="validity.valid||(value='');"
+              />
+            </div>
+            <div class="col">
+              <p class="h6">g 2 (m/s<sup>2</sup>):</p>
+              <input
+                type="number"
+                id="ag2"
+                value="9.8"
+                style="width: 70px"
+                min="0"
+                oninput="validity.valid||(value='');"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="card">
+        <div class="card-header">
+          <p class="h5">Opciones de gráfica</p>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              Mostrar ruta: <input type="checkbox" id="sp" checked="checked" />
+            </div>
+            <div class="col">
+              Mostrar horizontal: <input type="checkbox" id="sh" />
+            </div>
+            <div class="col">
+              Mostrar vertical: <input type="checkbox" id="sv" />
+            </div>
+            <div class="col">
+              Mostrar coords: <input type="checkbox" id="sc" />
+            </div>
+            <div class="col">
+              Mostrar ejes: <input type="checkbox" id="sa" checked="checked" />
+            </div>
+            <div class="col">
+              Mostrar cuadrícula: <input type="checkbox" id="sg" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="card">
+        <div class="card-header">
+          <p class="h5">Valores calculados para la masa 1</p>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <p id="maxHeight">Altura Máxima:</p>
+            </div>
+            <div class="col">
+              <p id="maxDistance">Distancia recorrida:</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p id="riseTime">Tiempo subida:</p>
+            </div>
+            <div class="col">
+              <p id="flyTime">Tiempo vuelo:</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="card">
+        <div class="card-header">
+          <p class="h5">Valores calculados para la masa 2</p>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <p id="maxHeight2">Altura Máxima 2:</p>
+            </div>
+            <div class="col">
+              <p id="maxDistance2">Distancia recorrida 2:</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p id="riseTime2">Tiempo subida 2:</p>
+            </div>
+            <div class="col">
+              <p id="flyTime2">Tiempo vuelo 2:</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+        <button id="start" type="button" class="btn btn-primary" mr="2">
+          Iniciar
+        </button>
+        <button id="pause_resume" type="button" class="btn btn-warning">
+          Pausar
+        </button>
+        <button id="reset" type="button" class="btn btn-danger">
+          Reiniciar
+        </button>
+      </div>
+      <hr />
+      <div id="canvas-container">
+        <canvas id="c" width="1000" height="630"></canvas>
+      </div>
+      <hr />
+      <style>
+        #canvas-container {
+          width: 100%; /* Ancho del contenedor */
+          height: 640px; /* Altura del contenedor */
+          overflow: auto; /* Habilitar el scroll */
+          border: 1px solid #000;
+        }
+
+        #c {
+          width: 1000px; /* Ancho del canvas (mayor que el del contenedor) */
+          height: 630px; /* Altura del canvas (mayor que el del contenedor) */
+        }
+      </style>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
